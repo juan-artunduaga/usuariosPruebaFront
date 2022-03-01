@@ -1,0 +1,43 @@
+<form [formGroup]="form" (ngSubmit)="saveProduct($event)">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Agregar Usuario</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-xs">
+                    <mat-form-field>
+                        <input matInput formControlName="nombre" placeholder="nombre" type="text">
+                    </mat-form-field>
+                    <p class="alerta"*ngIf="form.get('nombre')?.hasError('required') && form.get('nombre')?.dirty">El nombre es obligatorio</p>
+                    <p class="alerta" *ngIf="(form.get('nombre')?.hasError('minlength') ||form.get('nombre')?.hasError('maxlength') ) && form.get('nombre')?.dirty">El nombre debe tener entre 3 y 40</p>
+                    <p class="alerta" *ngIf="form.get('nombre')?.hasError('pattern') && form.get('nombre')?.dirty">Nombre no valido</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs">
+                    <mat-form-field>
+                        <mat-select placeholder="Rol" formControlName="idRol">
+                            <mat-option value="1">ADMINISTRADOR</mat-option>
+                            <mat-option value="2">AUDITOR</mat-option>
+                            <mat-option value="3">AUXILIAR</mat-option>
+                          </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs">
+                    <mat-form-field>
+                        <mat-select placeholder="Activo" formControlName="activo">
+                            <mat-option value="1">SI</mat-option>
+                            <mat-option value="0">NO</mat-option>
+                          </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button [disabled]="form.invalid" mat-raised-button type="submit">Guardar</button>
+        </mat-card-actions>
+    </mat-card>
+    </form>
